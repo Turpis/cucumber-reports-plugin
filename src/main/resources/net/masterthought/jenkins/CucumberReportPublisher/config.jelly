@@ -153,6 +153,11 @@
                             field="expandAllSteps"/>
 
             </f:entry>
+            <f:entry
+                    title="${%tagsToExclude.title}"
+                    field="tagsToExclude">
+                <f:textbox/>
+            </f:entry>
 
         </f:section>
 

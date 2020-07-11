@@ -67,6 +67,7 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
     private int trendsLimit;
     private String sortingMethod;
     private List<Classification> classifications;
+    private String tagsToExclude = "";
 
     private boolean mergeFeaturesById;
     private boolean mergeFeaturesWithRetest;
@@ -354,6 +355,15 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
     public boolean getExpandAllSteps() {
         return expandAllSteps;
     }
+    
+    @DataBoundSetter
+    public void setTagsToExclude(String tagsToExclude) {
+        this.tagsToExclude = tagsToExclude;
+    }
+
+    public String getTagsToExclude() {
+        return tagsToExclude;
+    }
 
     @Override
     public void perform(@Nonnull Run<?, ?> run, @Nonnull FilePath workspace, @Nonnull Launcher launcher, @Nonnull TaskListener listener)
@@ -452,6 +462,7 @@ public class CucumberReportPublisher extends Publisher implements SimpleBuildSte
         if (expandAllSteps) {
             configuration.addPresentationModes(PresentationMode.EXPAND_ALL_STEPS);
         }
+        configuration.setTagsToExcludeFromChart(tagsToExclude);
 
         configuration.addPresentationModes(PresentationMode.RUN_WITH_JENKINS);
 
